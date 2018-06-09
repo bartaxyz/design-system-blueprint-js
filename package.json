@@ -2,13 +2,14 @@
   "name": "dsblueprint",
   "version": "0.0.1",
   "license": "MIT",
-  "author": "Gabriel Montes <gabriel@utoctadel.com.ar>",
+  "author": "Ondřej Bárta <gabriel@utoctadel.com.ar>",
   "files": [
     "bin",
     "dist",
-    "lib"
+    "src"
   ],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "tiny-command": "bin/command.js"
   },
@@ -17,36 +18,43 @@
     "url": "git+https://github.com/gabmontes/tiny-package-starter.git"
   },
   "scripts": {
-    "lint": "npm run lint:lib && npm run lint:cli",
-    "lint:cli": "eslint cli",
-    "lint:lib": "eslint lib",
-    "test": "mocha --compilers js:babel-register",
+    "lint": "npm run lint:src && npm run lint:cli",
+    "lint:cli": "tslint cli",
+    "lint:src": "tslint src",
+    "_test": "mocha --compilers js:babel-register",
+    "test": "mocha -r ts-node/register test/*.ts",
     "coverage": "nyc --reporter=lcov --reporter=text npm test",
-    "build": "npm run build:lib && npm run build:cli",
-    "build:cli": "babel --presets latest -d bin/ cli/",
-    "build:lib": "babel --presets latest -d dist/ lib/",
-    "build:runtime": "babel --presets latest --plugins transform-runtime -d dist/ lib/",
+    "_build": "npm run build:src && npm run build:cli",
+    "build": "npm run build:src",
+    "build:cli": "babel -d bin/ cli/",
+    "build:src": "tsc --emitDeclarationOnly && babel src --out-dir dist --extensions \".ts,.tsx\"",
+    "type-check": "tsc --noEmit",
     "prepublish": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
+    "babel-polyfill": "^7.0.0-0",
     "babel-runtime": "^6.11.6",
     "core-js": "^2.4.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-latest": "^6.16.0",
-    "babel-preset-latest-minimal": "^1.1.2",
-    "babel-register": "^6.16.3",
-    "chai": "^4.0.0",
-    "eslint": "^4.1.0",
-    "mocha": "^3.1.2",
-    "nyc": "^11.0.0"
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-typescript": "^7.0.0-beta.49",
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^5.2.1",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "nyc": "^11.0.0",
+    "ts-node": "^6.1.0",
+    "tslint": "^4.1.0",
+    "typescript": "^2.9.1"
   },
   "homepage": "https://github.com/gabmontes/tiny-package-starter#readme",
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "test": "test"
   }
 }
