@@ -22,7 +22,7 @@
     "lint:cli": "tslint cli",
     "lint:src": "tslint src",
     "_test": "mocha --compilers js:babel-register",
-    "test": "mocha -r ts-node/register test/*.ts",
+    "test": "mocha -r ts-node/register test/**/index.ts",
     "coverage": "nyc --reporter=lcov --reporter=text npm test",
     "_build": "npm run build:src && npm run build:cli",
     "build": "npm run build:src",
@@ -34,7 +34,8 @@
   "dependencies": {
     "babel-polyfill": "^7.0.0-0",
     "babel-runtime": "^6.11.6",
-    "core-js": "^2.4.1"
+    "core-js": "^2.4.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
@@ -45,6 +46,7 @@
     "@babel/preset-typescript": "^7.0.0-beta.49",
     "@types/chai": "^4.1.3",
     "@types/mocha": "^5.2.1",
+    "@types/node": "^10.3.2",
     "chai": "^4.1.2",
     "mocha": "^3.5.3",
     "nyc": "^11.0.0",
