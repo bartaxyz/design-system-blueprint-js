@@ -19,9 +19,9 @@ describe('DSBP Empty Blueprint', () => {
 
         it(`should stringify a blueprint "${file}.json"`, () => {
             expect(
-                DSBP.tokenize(utils.getBlueprint(file))
+                DSBP.stringify(utils.getTokenized(file))
             ).to.deep.equal(
-                utils.getTokenized(file)
+                utils.getBlueprint(file)
             );
         });
 
