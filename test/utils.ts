@@ -17,9 +17,9 @@ export default class TestUtils {
         );
     }
 
-    getTokenized(fileName: string): any {
+    getParsed(fileName: string): any {
         const tokenizedFileContents = fs.readFileSync(
-            `${this.testRoot}/tokenized/${fileName}.json`,
+            `${this.testRoot}/parsed/${fileName}.json`,
             this.readFileOptions,
         );
         return JSON.parse(tokenizedFileContents);

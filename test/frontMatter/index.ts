@@ -9,17 +9,17 @@ describe('DSBP Front Matter', () => {
 
     files.forEach(file => {
 
-        it(`should tokenize a blueprint "${file}.dsbp"`, () => {
+        it(`should parse a blueprint "${file}.dsbp"`, () => {
             expect(
-                DSBP.tokenize(utils.getBlueprint(file))
+                DSBP.toJSON(utils.getBlueprint(file))
             ).to.deep.equal(
-                utils.getTokenized(file)
+                utils.getParsed(file)
             );
         });
 
         it(`should stringify a blueprint "${file}.json"`, () => {
             expect(
-                DSBP.stringify(utils.getTokenized(file))
+                DSBP.toString(utils.getParsed(file))
             ).to.deep.equal(
                 utils.getBlueprint(file)
             );
